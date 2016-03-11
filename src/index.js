@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BooksList from './components/BooksList.js';
+import 'whatwg-fetch';
 const books = [
   {
     key: '1',
@@ -26,4 +27,9 @@ const books = [
     description: 'Hello world'
   }
 ];
+
+fetch('./books.json').then(function(data){
+    console.log(data);
+  });
+
 ReactDOM.render(<BooksList list={books} />, document.getElementById('comps'));
