@@ -1,5 +1,10 @@
-# es6-react
+# ES6-React
 Code base for React with ES6+7
-##build
+##Build
 - Run `npm install`
-- run `webpack`
+- install webpack globally by running `npm install webpack`
+- install webpack-dev-server globally by running `npm install webpack`
+- Run `webpack`
+##Run
+- Run `webpack-dev-server --content-base ./bin`
+
