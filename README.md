@@ -9,3 +9,5 @@ Code base for React with ES6+7
 ## Run
 - Run `webpack-dev-server --content-base ./bin`
 
+## Test
+- Run `npm test`
