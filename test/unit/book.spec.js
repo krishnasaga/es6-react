@@ -1,7 +1,14 @@
 var assert = require('assert');
 const Code = require('code');
 const expect = Code.expect;
-import { booksNotLoaded, booksLoading, booksLoaded, booksLoadingFailed } from '../../src/actions/book.js';
+import {
+  booksNotLoaded,
+  booksLoading,
+  booksLoaded,
+  booksLoadingFailed
+} from '../../src/actions/book.js';
+
+import booksApp from '../../src/reducers/index.js';
 
 describe('Books http endpont', function() {
     it('GET /books.json', function () {
@@ -28,7 +35,7 @@ describe('Load Books actions', function() {
     });
   });
 
-  describe('Books books loaded!', function () {
+  describe('Books loaded!', function () {
     it('status LOADED', function () {
       const action = booksLoaded();
       expect(action.type).to.be.a.string().and.to.equal('BOOKS');
@@ -53,17 +60,29 @@ describe('Load Books actions', function() {
   });
 });
 
+
+const initialState = {
+  books: {
+    status: 'NOT_LOADED',
+    list: []
+  }
+}
+
 describe('reduce booksApp', function() {
     it('computes state for loading....', function () {
-      expect(true).to.be.a.boolean().and.to.not.equal(false);
+      let currentState = booksApp(initialState,booksLoading());
+      expect(currentState.books.status).to.equal('LOADING');
     });
     it('computes state for loaded!', function () {
-      expect(true).to.be.a.boolean().and.to.not.equal(false);
+      let currentState = booksApp(initialState,booksNotLoaded());
+      expect(currentState.books.status).to.equal('NOT_LOADED');
     });
     it('computes state for not loaded', function () {
-      expect(true).to.be.a.boolean().and.to.not.equal(false);
+      let currentState = booksApp(initialState,booksLoadingFailed());
+      expect(currentState.books.status).to.equal('LOADING_FAILED');
     });
     it('computes state for loading faild! ', function () {
-      expect(true).to.be.a.boolean().and.to.not.equal(false);
+      let currentState = booksApp(initialState,booksNotLoaded());
+      expect(currentState.books.status).to.equal('NOT_LOADED');
     });
 });
