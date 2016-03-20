@@ -9,5 +9,8 @@ export default function booksApp(state = initialState,action){
   return Object.assign({},state,{
     books: {status: 'LOADING'}
   });
+  else if(action.type === 'BOOKS' && action.status === 'LOADED')
+  return Object.assign({},state,{books: {status: 'LOADED'}});
+
   return state;
 }

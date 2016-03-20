@@ -3,9 +3,14 @@ import ReactDOM from 'react-dom';
 import BooksList from './components/BooksList.js';
 import 'whatwg-fetch';
 import { booksNotLoaded } from './actions/book.js';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import bookApp from './reducers/index.js'
+import { asycLoadBooks } from './actions/book.js'
 
-console.log(booksNotLoaded());
-
+const store = createStore(bookApp,applyMiddleware(thunk));
+store.subscribe(() => console.log(store.getState()));
+store.dispatch(asycLoadBooks());
 fetch('./books.json').then(function(response){
   return response.json()
 }).then(function(json) {

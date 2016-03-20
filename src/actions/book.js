@@ -5,3 +5,20 @@ export function booksLoading(){
     list: []
   }
 }
+
+export function booksLoaded(){
+  return {
+    type: 'BOOKS',
+    status: 'LOADED',
+    list: []
+  }
+}
+
+export function asycLoadBooks(){
+  return function(dispatch){
+            dispatch(booksLoading());
+    setTimeout(()=> {
+      return dispatch(booksLoaded());
+    },1000);
+  }
+}
