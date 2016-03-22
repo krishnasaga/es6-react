@@ -21,5 +21,5 @@ fetch('./books.json').then(function(response){
   );
 
 }).catch(function(ex) {
-  console.log('parsing failed', ex)
+  console.log('parsing failed', ex);
 });
