@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 export function booksLoading(){
   return {
     type: 'BOOKS',
@@ -6,19 +7,22 @@ export function booksLoading(){
   }
 }
 
-export function booksLoaded(){
+export function booksLoaded(data){
   return {
     type: 'BOOKS',
     status: 'LOADED',
-    list: []
+    list: data
   }
 }
 
 export function asycLoadBooks(){
   return function(dispatch){
-            dispatch(booksLoading());
-    setTimeout(()=> {
-      return dispatch(booksLoaded());
-    },1000);
+
+    dispatch(booksLoading());
+
+    fetch('/books.json')
+    .then((result) => result.json() )
+    .then((data) => dispatch(booksLoaded(data)) );
+
   }
 }

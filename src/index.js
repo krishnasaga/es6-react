@@ -7,19 +7,11 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import bookApp from './reducers/index.js'
 import { asycLoadBooks } from './actions/book.js'
-
+import BooksListContainer from './components/BooksListContainer.js'
+import { Provider } from 'react-redux'
 const store = createStore(bookApp,applyMiddleware(thunk));
 store.subscribe(() => console.log(store.getState()));
-store.dispatch(asycLoadBooks());
-fetch('./books.json').then(function(response){
-  return response.json()
-}).then(function(json) {
-
   ReactDOM.render(
-      <BooksList list={json} />,
+      <Provider store={store} ><BooksListContainer /></Provider>,
       document.getElementById('comps')
   );
-
-}).catch(function(ex) {
-  console.log('parsing failed', ex);
-});
