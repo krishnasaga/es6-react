@@ -1,3 +1,5 @@
+var precss       = require('precss'),
+    autoprefixer = require('autoprefixer');
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -15,5 +17,8 @@ module.exports = {
       loaders: ['style','css','postcss']
     }
   ]
+  },
+  postcss: function () {
+        return [precss, autoprefixer];
   }
 };
